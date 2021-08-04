@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+<!-- <script src="node_modules/d3/dist/d3.min.js"> </script> -->
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<!-- <script src="https://d3js.org/d3-geo.v2.min.js"></script> -->
+<script src="node_modules/d3-interpolate-path/build/d3-interpolate-path.min.js"></script>
+
+<script src="./main.js"></script>
+<script src="./DragInput.js"></script>
+<script src="./texts-en.js"></script>
+
+<style>
+#display {
+  position: relative;
+}
+#explanationText {
+  font-family: Helvetica;
+	font-weight: normal;
+	font-size: 14px;
+  line-height: 16px;
+  width: 500px;
+  height: 150px;
+  overflow: auto;
+  position: absolute;
+  top: 10px;
+  left: 150px;
+}
+
+#explanationText h1{
+  font-size: 18px;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div id="display">
+    <svg id="svg"></svg>
+    <div id=explanationText> </div>
+</div>
+
+<br>
+<svg id="controls"> </svg>
+<br>
+<input type="radio" id="EEB_scenario" name="scenario" value="EEB"> The Earth Energy Balance <br>
+<input type="radio" id="IAF_scenario" name="scenario" value="IAF"> The Ice-Albedo Feedback <br>
+<input type="radio" id="GHE_scenario" name="scenario" value="GHE"> The Greenhouse Effect <br>
+
+<input type="checkbox" id="mathMode"> Math Mode
+
+
+
+<script>
+var width = 1024;
+var height = 600;
+svg = d3.select("#svg")
+          .attr("width", width)
+          .attr("height", height);
+
+//CO2_pos = [{x:500,y:500},{x:600,y:500}];
+CO2_pos = [];
+
+loadSVGscene();
+
+var controlsSvg = d3.select("#controls")
+                      .attr("width", 1000)
+                      .attr("height", 80);
+
+var inputSunrays = controlsSvg.append("g")
+                      .attr("transform","translate(50,20)");
+
+var inputSnow = controlsSvg.append("g")
+                    .attr("transform","translate(150,20)");
+
+var inputCO2 = controlsSvg.append("g")
+                    .attr("transform","translate(250,20)");
+
+new DragInput(0,0,100,inputSunrays,updateSunrays);
+new DragInput(0,0,100,inputSnow,updateSnow);
+new DragInput(0,0,100,inputCO2,updateCO2);
+
+
+document.getElementById('EEB_scenario').addEventListener('change', setImage);
+document.getElementById('IAF_scenario').addEventListener('change', setImage);
+document.getElementById('GHE_scenario').addEventListener('change', setImage);
+document.getElementById('mathMode').addEventListener('change', setImage);
+
+function setImage(){
+  if (document.getElementById("EEB_scenario").checked) {
+    revealObj(d3.select("#layer_EEB"));
+    vanishObj(d3.select("#layer_GHE_math"));
+    if (document.getElementById("mathMode").checked)
+          { setText("EEB_mat") }
+      else
+          { setText("EEB_gen") }
+  } else {
+    vanishObj(d3.select("#layer_EEB"))
+  }
+
+  if (document.getElementById("IAF_scenario").checked) {
+    //revealObj(d3.select("#layer_EEB"));
+    vanishObj(d3.select("#layer_GHE_math"));
+    if (document.getElementById("mathMode").checked)
+          { setText("IAF_mat") }
+      else
+          { setText("IAF_gen") }
+  } else {
+    //vanishObj(d3.select("#layer_EEB"))
+  }
+
+  if (document.getElementById("GHE_scenario").checked) {
+    revealObj(d3.select("#layer_GHE"));
+    if (document.getElementById("mathMode").checked)
+          { setText("GHE_mat");
+            revealObj(d3.select("#layer_GHE_math"));
+          }
+      else
+          { setText("GHE_gen")
+            vanishObj(d3.select("#layer_GHE_math"));
+          }
+  } else {
+    vanishObj(d3.select("#layer_GHE"))
+  }
+}
+
+
+function setText(t){
+  d3.select("#explanationText").html(texts[t]);
+}
+
+</script>
+
+
+
+</body>
+
+
+</html>

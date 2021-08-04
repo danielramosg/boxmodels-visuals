@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "d3-interpolate-path": "^2.2.3"
+  }
+}
