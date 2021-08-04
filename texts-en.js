@@ -18,13 +18,13 @@ texts = {
       The feedback makes the system have memory. Change the value of L and watch the L-T graph moving. The temperature of the planet does not depend only on the energy balance, but also on the historic values it had before. Reversing the tendency is much harder. This effect is called hysteresis.`,
 
   GHE_gen :
-      `<h1> The Ice-Albedo Feedback (M)</h1>
+      `<h1> The Greenhouse Effect </h1>
       This model has two boxes to represent the Earth: the ground and the atmosphere. The visible light from the Sun goes across the atmosphere and reaches the ground. When the warm ground emits infrared light, part of it gets absorbed by the atmosphere which, in turn, gets warm and emits infrared radiation both to the ground and to the space. This acts as an energy trap, making the ground warmer than the atmosphere. The amount of infrared light that the atmosphere can absorb and emit depends on its composition. Adding CO_2 to the atmosphere makes it more opaque to infrared, which increases this Greenhouse effect.
 
       Unlike the previous two theoretical examples, this third model is quite realistic and has been tuned with real values.`,
 
   GHE_mat :
-      `<h1> The Ice-Albedo Feedback </h1>
+    `<h1> The Greenhouse Effect (M)</h1>
     The Stefan-Boltzmann law ($E_out = \epsilon \sigma T^4$) applies to the ground and to the atmosphere, with the difference that $\epsilon$ is 1 for the ground (opaque body) and it is between 0 and 1 for the atmosphere, linked to the CO_2 amount (and other greenhouse gases) present in the air.
     Note that the relationship between CO_2 and epsilon is logarithmic. This means that doubling the amount of gas has always the same effect, independently of the absolute amount (this is called saturation). CO_2 is naturally present in the atmosphere, which helps us because fossil fuels emissions are massive. However, other greenhouse gases (such as methane) are not naturally present in the atmosphere and smaller emissions have a bigger impact than the same amount of CO2.`
 

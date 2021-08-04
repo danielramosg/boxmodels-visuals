@@ -103,14 +103,14 @@ function setImage(){
   }
 
   if (document.getElementById("IAF_scenario").checked) {
-    //revealObj(d3.select("#layer_EEB"));
+    revealObj(d3.select("#layer_IAF"));
     vanishObj(d3.select("#layer_GHE_math"));
     if (document.getElementById("mathMode").checked)
           { setText("IAF_mat") }
       else
           { setText("IAF_gen") }
   } else {
-    //vanishObj(d3.select("#layer_EEB"))
+    vanishObj(d3.select("#layer_IAF"))
   }
 
   if (document.getElementById("GHE_scenario").checked) {
